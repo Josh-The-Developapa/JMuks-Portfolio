@@ -79,50 +79,45 @@ const Home = () => {
 
       <main>
         {/* --- Hero Section --- */}
-        <section
-          id="home"
-          ref={sectionRefs.home}
-          className="pt-24 pb-16 md:pt-32 md:pb-24 min-h-screen flex items-center"
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="md:flex md:items-center md:justify-between md:gap-12">
-              <div className="md:w-1/2 mb-12 md:mb-0">
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-                  Hi, I'm <span className="gradient-text">Joshua Mukisa</span>
-                </h1>
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-600 mb-6">
-                  Software Developer
-                </h2>
-                <p className="text-lg text-gray-500 mb-8 max-w-lg">
-                  I'm a software developer with 5+ years of experience building
-                  full-stack apps, AI/ML systems, and real-world IoT solutions.
-                  I'm driven by the goal to see Wakanda become a reality and
-                  desire to inspire a generation of Africans to rise, lead, and
-                  redefine the global tech space.
-                </p>
-                <div className="flex space-x-4">
-                  <Link
-                    to="#contact"
-                    onClick={(e) => handleNavLinkClick(e, 'contact')}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300"
-                  >
-                    Get In Touch
-                  </Link>
-                  <Link
-                    to="#projects"
-                    onClick={(e) => handleNavLinkClick(e, 'projects')}
-                    className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-300"
-                  >
-                    View Work
-                  </Link>
-                </div>
-              </div>
-              <div className="md:w-1/2 flex justify-center items-center">
-                <div className="w-full max-w-md h-96 md:h-[500px]">
-                  <HeroImageMasonry />
-                </div>
+        <section id="home" ref={sectionRefs.home} className="h-screen flex">
+          {/* Left Panel - Text Content */}
+          <div className="w-1/2 flex justify-center items-center px-8 lg:px-16">
+            <div className="max-w-lg">
+              <h1 className="text-4xl md:text-5xl lg:text-[40px] font-bold leading-tight mb-4">
+                Hi, I'm <span className="gradient-text">Joshua Mukisa</span>
+              </h1>
+              <h2 className="text-2xl md:text-3xl lg:text-[30px] font-semibold text-gray-600 mb-6">
+                Software Developer
+              </h2>
+              <p className="text-lg md:text-[17px] text-gray-500 mb-8 font-[400]">
+                I'm a software developer with 5+ years of experience building
+                full-stack apps, AI/ML systems, and real-world IoT solutions.
+                I'm driven by the goal to see Wakanda become a reality and the
+                desire to inspire a generation of Africans to rise, lead, and
+                redefine the global tech space.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  to="#contact"
+                  onClick={(e) => handleNavLinkClick(e, 'contact')}
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300 text-center"
+                >
+                  Get In Touch
+                </Link>
+                <Link
+                  to="#projects"
+                  onClick={(e) => handleNavLinkClick(e, 'projects')}
+                  className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-300 text-center"
+                >
+                  View Work
+                </Link>
               </div>
             </div>
+          </div>
+
+          {/* Right Panel - Masonry Layout */}
+          <div className="w-1/2 h-full">
+            <HeroImageMasonry />
           </div>
         </section>
 

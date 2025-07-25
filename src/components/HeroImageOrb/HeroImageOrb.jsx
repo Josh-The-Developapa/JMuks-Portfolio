@@ -1,40 +1,34 @@
 import React from 'react';
 import sample1 from '../../assets/pic-1.jpeg';
 import sample2 from '../../assets/pic-2.jpeg';
-import sample3 from '../../assets/pic-3.jpg';
-import sample4 from '../../assets/VoteAble.png';
-import sample5 from '../../assets/VoteAble.png';
-import sample6 from '../../assets/VoteAble.png';
+import sample3 from '../../assets/pic-3.jpeg';
+import sample4 from '../../assets/pic-4.jpeg';
+import sample5 from '../../assets/pic-5.jpeg';
+import sample6 from '../../assets/pic-6.jpeg';
 
 // Define your masonry layout with specific images and heights
 const masonryConfig = {
   leftColumn: [
-    { image: sample1, height: 'h-64', alt: 'Featured Project 1' }, // tall - good for portrait
-    { image: sample2, height: 'h-36', alt: 'Quick Preview 1' }, // short - good for landscape
-    { image: sample3, height: 'h-48', alt: 'Development Work 1' }, // medium
-    { image: sample4, height: 'h-40', alt: 'VoteAble App' }, // medium-short
-    { image: sample5, height: 'h-52', alt: 'Portfolio Piece 1' }, // tall-medium
-    { image: sample6, height: 'h-32', alt: 'Code Snippet View' }, // short
-    { image: sample1, height: 'h-64', alt: 'Featured Project 2' }, // medium
-    { image: sample2, height: 'h-60', alt: 'Main Showcase' }, // extra tall
-    { image: sample3, height: 'h-36', alt: 'Quick Preview 2' }, // short
+    { image: sample1, height: 'h-96', alt: 'VoteAble Pic' }, // tall - good for portrait
+    { image: sample2, height: 'h-60', alt: 'VoteAble Pic' }, // short - good for landscape
+    { image: sample3, height: 'h-80', alt: 'VoteAble Pic' }, // medium
+    { image: sample4, height: 'h-64', alt: 'VoteAble Pic' }, // medium-short
+    { image: sample5, height: 'h-80', alt: 'Grad Pic' }, // tall-medium
+    { image: sample6, height: 'h-96', alt: 'Grad Pic' }, // short
   ],
   rightColumn: [
-    { image: sample4, height: 'h-40', alt: 'VoteAble Preview' }, // medium-short
-    { image: sample5, height: 'h-64', alt: 'Hero Project' }, // extra tall - great for portraits
-    { image: sample6, height: 'h-32', alt: 'Code Preview' }, // short
-    { image: sample1, height: 'h-48', alt: 'Development Work 2' }, // medium
-    { image: sample2, height: 'h-36', alt: 'Quick Look' }, // short
-    { image: sample3, height: 'h-56', alt: 'Featured Work' }, // tall
-    { image: sample4, height: 'h-44', alt: 'App Interface' }, // medium
-    { image: sample5, height: 'h-40', alt: 'Portfolio Piece 2' }, // medium-short
-    { image: sample6, height: 'h-52', alt: 'Showcase Item' }, // tall-medium
+    { image: sample6, height: 'h-96', alt: 'Grad Pic' },
+    { image: sample5, height: 'h-80', alt: 'Grad Pic' },
+    { image: sample4, height: 'h-64', alt: 'VoteAble Pic' },
+    { image: sample3, height: 'h-80', alt: 'VoteAble Pic' },
+    { image: sample2, height: 'h-60', alt: 'VoteAble Pic' },
+    { image: sample1, height: 'h-96', alt: 'VoteAble Pic' },
   ],
 };
 
 const HeroImageMasonry = () => {
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-2xl">
+    <div className="relative w-full h-full overflow-hidden">
       {/* Masonry Grid Container */}
       <div className="absolute inset-0">
         {/* Left Column */}

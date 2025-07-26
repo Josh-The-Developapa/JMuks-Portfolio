@@ -54,7 +54,7 @@ const aboutConfig = {
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com',
+      url: 'https://linkedin.com/in/joshua-mukisa-kiryowa/',
       icon: 'fab fa-linkedin',
     },
     {
@@ -71,10 +71,12 @@ const aboutConfig = {
 };
 
 const SectionHeader = ({ title, subtitle = '', className = '' }) => (
-  <div className={`text-center mb-10 ${className}`}>
-    <h2 className="text-3xl font-bold mb-4">{title}</h2>
-    {subtitle && <p className="text-gray-600 mb-4">{subtitle}</p>}
-    <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+  <div className={`text-center mb-4 sm:mb-6 ${className}`}>
+    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">{title}</h2>
+    {subtitle && (
+      <p className="text-gray-600 text-sm sm:text-base">{subtitle}</p>
+    )}
+    <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-2" />
   </div>
 );
 
@@ -89,16 +91,20 @@ const ProfileImage = ({ image }) => (
 );
 
 const ExpertiseCard = ({ expertise }) => (
-  <div className="bg-gray-50 p-4 rounded-lg">
+  <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
     <div className="flex items-center mb-2">
       <div
-        className={`w-8 h-8 rounded-full ${expertise.iconBg} flex items-center justify-center mr-3`}
+        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full ${expertise.iconBg} flex items-center justify-center mr-3 flex-shrink-0`}
       >
-        <i className={`${expertise.icon} ${expertise.iconColor}`}></i>
+        <i
+          className={`${expertise.icon} ${expertise.iconColor} text-sm sm:text-base`}
+        ></i>
       </div>
-      <h4 className="font-medium">{expertise.title}</h4>
+      <h4 className="font-medium text-sm sm:text-base">{expertise.title}</h4>
     </div>
-    <p className="text-gray-500 text-sm">{expertise.description}</p>
+    <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
+      {expertise.description}
+    </p>
   </div>
 );
 
@@ -107,41 +113,61 @@ const SocialLink = ({ link }) => (
     href={link.url}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center text-blue-500 hover:text-blue-700 transition-colors duration-300"
+    className="flex items-center text-blue-500 hover:text-blue-700 transition-colors duration-300 text-sm sm:text-base py-1"
   >
-    <i className={`${link.icon} mr-2`}></i> {link.name}
+    <i className={`${link.icon} mr-2 w-4 text-center`}></i>
+    <span className="truncate">{link.name}</span>
   </a>
 );
 
-const AboutSection = ({ config = aboutConfig }) => {
+const AboutSection = ({
+  config = aboutConfig,
+  sectionId = 'about',
+  sectionRef,
+}) => {
   return (
-    <section className="w-full min-h-[95vh]  bg-white flex flex-col mb-[100px]">
-      <div className="flex flex-col md:flex-row w-full h-full">
-        {/* Left: Full height image, 50% width on desktop */}
-        <div className="w-full md:w-1/2 h-[350px] md:h-[780px]">
+    <section
+      className="w-full min-h-screen bg-gray-50"
+      ref={sectionRef}
+      id={sectionId}
+    >
+      {/* Mobile-first approach */}
+      <div className="flex flex-col lg:flex-row w-full min-h-screen">
+        {/* Image Section */}
+        <div className="w-full lg:w-1/2 h-64 sm:h-80 md:h-96 lg:h-screen relative">
           <ProfileImage image={config.whoAmI.image} />
+          {/* Overlay for better text readability on mobile if needed */}
         </div>
 
-        {/* Right: Content */}
-        <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
-          <SectionHeader title={config.title} subtitle={config.subtitle} />
-          <h3 className="text-2xl font-semibold mb-4">
-            {config.whoAmI.heading}
-          </h3>
-          <p className="text-gray-600 mb-6">{config.whoAmI.description}</p>
+        {/* Content Section */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+          <div className="w-full max-w-lg xl:max-w-xl">
+            <SectionHeader title={config.title} subtitle={config.subtitle} />
 
-          {/* Expertise */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {config.expertise.map((expertise, index) => (
-              <ExpertiseCard key={`expertise-${index}`} expertise={expertise} />
-            ))}
-          </div>
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4">
+              {config.whoAmI.heading}
+            </h3>
 
-          {/* Social Links */}
-          <div className="flex flex-wrap gap-4">
-            {config.socialLinks.map((link, index) => (
-              <SocialLink key={`social-${index}`} link={link} />
-            ))}
+            <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
+              {config.whoAmI.description}
+            </p>
+
+            {/* Expertise Grid - Responsive */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-4 xl:gap-6 mb-4 sm:mb-6">
+              {config.expertise.map((expertise, index) => (
+                <ExpertiseCard
+                  key={`expertise-${index}`}
+                  expertise={expertise}
+                />
+              ))}
+            </div>
+
+            {/* Social Links - Responsive Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2 sm:gap-3">
+              {config.socialLinks.map((link, index) => (
+                <SocialLink key={`social-${index}`} link={link} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

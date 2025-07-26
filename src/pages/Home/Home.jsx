@@ -81,7 +81,7 @@ const Home = () => {
         {/* --- Hero Section --- */}
         <section id="home" ref={sectionRefs.home} className="h-screen flex">
           {/* Left Panel - Text Content */}
-          <div className="w-1/2 flex justify-center items-center px-8 lg:px-16">
+          <div className="w-1/2 flex justify-center items-center px-8 lg:px-16 pb-[100px]">
             <div className="max-w-lg">
               <h1 className="text-4xl md:text-5xl lg:text-[40px] font-bold leading-tight mb-4">
                 Hi, I'm <span className="gradient-text">Joshua Mukisa</span>
@@ -89,7 +89,7 @@ const Home = () => {
               <h2 className="text-2xl md:text-3xl lg:text-[30px] font-semibold text-gray-600 mb-6">
                 Software Developer
               </h2>
-              <p className="text-lg md:text-[17px] text-gray-500 mb-8 font-[400]">
+              <p className="text-lg md:text-[18px] text-gray-500 mb-8 font-[400]">
                 I'm a software developer with 5+ years of experience building
                 full-stack apps, AI/ML systems, and real-world IoT solutions.
                 I'm driven by the goal to see Wakanda become a reality and the
@@ -100,14 +100,14 @@ const Home = () => {
                 <Link
                   to="#contact"
                   onClick={(e) => handleNavLinkClick(e, 'contact')}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300 text-center"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300 text-center text-[16px]"
                 >
                   Get In Touch
                 </Link>
                 <Link
                   to="#projects"
                   onClick={(e) => handleNavLinkClick(e, 'projects')}
-                  className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-300 text-center"
+                  className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-300 text-center text-[16px]"
                 >
                   View Work
                 </Link>
@@ -116,7 +116,7 @@ const Home = () => {
           </div>
 
           {/* Right Panel - Masonry Layout */}
-          <div className="w-1/2 h-full">
+          <div className="w-1/2 h-[100%]">
             <HeroImageMasonry />
           </div>
         </section>

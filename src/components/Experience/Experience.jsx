@@ -46,9 +46,24 @@ const experienceConfig = {
       ],
     },
     {
+      title: 'Digital Operations & IT Assistant',
+      company: 'Great Lake Safaris Ltd',
+      period: 'June 2024 - Aug 2024, June 2025 - July 2025',
+      location: 'Mutungo Hill, Biina Road - Kampala, Uganda',
+      logo: GreatLakeSafaris,
+      website: 'https://greatlakessafaris.com',
+      logoAlt: 'Great Lake Safaris Logo',
+      achievements: [
+        'Maintained close contact with CEO, Mr. Amos Wekesa, gaining insight into business strategy and tech in tourism',
+        'Assisted with website updates and digital content management',
+        'Helped organize booking data and client information systems',
+        'Observed tour logistics and backend operations',
+      ],
+    },
+    {
       title: 'IT & Operations Intern',
       company: 'DEI BioPharma Ltd',
-      period: 'June 2024 - Aug 2024',
+      period: 'December 2024 - April 2025',
       location: 'Matugga, Bombo Road - Kampala, Uganda',
       logo: DEI,
       website: 'https://www.deibiopharma.com',
@@ -63,18 +78,18 @@ const experienceConfig = {
       ],
     },
     {
-      title: 'IT & Operations Intern',
-      company: 'Great Lake Safaris Ltd',
-      period: 'December 2024 - April 2025',
-      location: 'Matugga, Bombo Road - Kampala, Uganda',
-      logo: GreatLakeSafaris,
-      website: 'https://greatlakessafaris.com',
-      logoAlt: 'Great Lake Safaris Logo',
+      title: 'Electoral Data & Logistics Intern',
+      company: 'Electoral Commission of Uganda',
+      period: 'Jun 2022',
+      location: 'Kampala, Uganda',
+      logo: ElectoralComission,
+      website: 'https://ec.or.ug',
+      logoAlt: 'Electoral Commission of Uganda Logo',
       achievements: [
-        'Maintained close contact with CEO, Mr. Amos Wekesa, gaining insight into business strategy and tech in tourism',
-        'Assisted with website updates and digital content management',
-        'Helped organize booking data and client information systems',
-        'Observed tour logistics and backend operations',
+        'Organized and distributed voter registration books to district heads during electoral processes',
+        'Supported election logistics and district coordination with administrative precision',
+        'Conducted data analysis in Excel to extract and interpret key registration trends',
+        'Leveraged technology to deliver data-driven insights for decision-making support',
       ],
     },
     {
@@ -91,21 +106,6 @@ const experienceConfig = {
         'Collaborated with the team to integrate gallery images, enhancing visual appeal and site functionality',
         'Strengthened web development skills and teamwork through project collaboration',
         'Gained exposure to cutting-edge web technologies and tools',
-      ],
-    },
-    {
-      title: 'Intern',
-      company: 'Electoral Commission of Uganda',
-      period: 'Jun 2022',
-      location: 'Kampala, Uganda',
-      logo: ElectoralComission,
-      website: 'https://ec.or.ug',
-      logoAlt: 'Electoral Commission of Uganda Logo',
-      achievements: [
-        'Organized and distributed voter registration books to district heads during electoral processes',
-        'Supported election logistics and district coordination with administrative precision',
-        'Conducted data analysis in Excel to extract and interpret key registration trends',
-        'Leveraged technology to deliver data-driven insights for decision-making support',
       ],
     },
   ],
@@ -425,7 +425,7 @@ const ExperienceSection = ({
     <section
       id={sectionId}
       ref={sectionRef}
-      className={`py-8 sm:py-12 lg:py-16 xl:py-20 bg-white ${containerClassName}`}
+      className={`py-8 sm:py-12 lg:py-16 xl:py-10 bg-white ${containerClassName}`}
     >
       <div className="max-w-4xl lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader title={config.title} subtitle={config.subtitle} />

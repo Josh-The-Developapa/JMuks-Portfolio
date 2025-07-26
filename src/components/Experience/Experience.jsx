@@ -13,7 +13,7 @@ const experienceConfig = {
   subtitle: '',
   experiences: [
     {
-      title: 'CEO and Founder',
+      title: 'Founder and CEO',
       company: 'VoteAble Inc',
       period: 'July 2022 - Present',
       location: '',

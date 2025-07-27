@@ -24,7 +24,7 @@ const experienceConfig = {
         "Founded and led a full-stack e-voting platform for Ugandan schools' student council elections",
         "Architected and developed VoteAble's core codebase as the principal software engineer",
         'Managed daily operations and coordinated a team of classmates to drive product development and launch',
-        'Successfully launched the platform at Aga Khan High School Kampala, with plans to expand to other schools',
+        'Successfully launched the platform at Aga Khan High School Kampala in 2022, with plans to expand to other schools',
         'Monetized the platform through a subscription-based service, creating a sustainable revenue model',
         'Gained hands-on experience in project management, team leadership, and stakeholder collaboration',
       ],

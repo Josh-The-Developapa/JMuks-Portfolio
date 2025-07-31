@@ -76,12 +76,6 @@ const Header = ({ activeLink, onNavLinkClick }) => {
           {/* Logo & Brand Section */}
           <div className="flex items-center space-x-3">
             <JMLogo size={52} className="hover:scale-105 cursor-pointer" />
-            {/* <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-                Joshua Mukisa
-              </h1>
-              <p className="text-xs text-gray-500 -mt-1">Software Developer</p>
-            </div> */}
           </div>
 
           {/* Desktop Navigation */}
@@ -150,15 +144,6 @@ const Header = ({ activeLink, onNavLinkClick }) => {
       >
         <div className="px-4 pt-2 pb-4 space-y-1">
           {/* Mobile Brand Info */}
-          <div className="flex items-center space-x-3 px-3 py-2 border-b border-gray-100 mb-2">
-            <JMLogo size={32} />
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900">
-                Joshua Mukisa
-              </h2>
-              <p className="text-sm text-gray-500">Software Developer</p>
-            </div>
-          </div>
 
           {/* Mobile Nav Links */}
           {navLinks.map((link) => (

@@ -1,10 +1,9 @@
 import React from 'react';
 import VoteAbleImg from '../../assets/VoteAble.png';
 import CaderaImg from '../../assets/Cadera.png';
-import SpeedBallImg from '../../assets/SpeedBall.png';
+import CImageAIImg from '../../assets/CImage-AI.png'; // <-- updated import
 import { Link } from 'react-router';
 
-// Updated projects config with your actual projects and snapshots
 const projectsConfig = {
   title: 'Featured Projects',
   subtitle: '',
@@ -12,53 +11,64 @@ const projectsConfig = {
     {
       title: 'VoteAble',
       description:
-        'Full-stack e-voting platform built with the MERN technology stack. Used by schools in Uganda for student council elections. Running at Aga Khan High School Kampala and expanding.',
+        'An electronic voting system revolutionizing how schools in Uganda conduct student leadership elections. Already trusted and used by Aga Khan High School, Kampala.',
       tags: [
         { name: 'React', color: 'bg-blue-100', textColor: 'text-blue-700' },
         { name: 'Node.js', color: 'bg-green-100', textColor: 'text-green-700' },
+        {
+          name: 'Express.js',
+          color: 'bg-gray-100',
+          textColor: 'text-gray-700',
+        },
         {
           name: 'MongoDB',
           color: 'bg-purple-100',
           textColor: 'text-purple-700',
         },
+        { name: 'JWT Auth', color: 'bg-red-100', textColor: 'text-red-700' },
       ],
       image: VoteAbleImg,
+      statusText: '',
       liveUrl: 'https://voteable.live',
-      caseStudyUrl: '/projects/voteable',
     },
     {
       title: 'Cadera',
       description:
-        'Powerful School Information System for report card management and academic records, helping schools streamline academic reporting.',
+        'A smart academic records system built to modernize how schools manage report cards and student performance. Faster, simpler, and more secure.',
       tags: [
         { name: 'React', color: 'bg-blue-100', textColor: 'text-blue-700' },
-        { name: 'Express', color: 'bg-green-100', textColor: 'text-green-700' },
+        { name: 'NestJS', color: 'bg-green-100', textColor: 'text-green-700' },
         {
-          name: 'PostgreSQL',
+          name: 'Supabase',
+          color: 'bg-yellow-100',
+          textColor: 'text-yellow-700',
+        },
+        {
+          name: 'Prisma',
           color: 'bg-purple-100',
           textColor: 'text-purple-700',
         },
       ],
       image: CaderaImg,
-      liveUrl: 'https://cadera-frontend.onrender.com',
-      caseStudyUrl: '/projects/cadera',
+      statusText: 'In Progress',
+      // liveUrl: 'https://cadera-frontend.onrender.com',
     },
     {
-      title: 'SpeedBall',
+      title: 'CImage AI',
       description:
-        'Full-stack website for a Ugandan fashion brand. Allows browsing, ordering, event ticket purchase, and admin order/newsletter management.',
+        'A lightweight image classification app that uses TensorFlow.js and MobileNet on the backend to identify objects from user-uploaded images. Fast and responsive.',
       tags: [
         { name: 'React', color: 'bg-blue-100', textColor: 'text-blue-700' },
         { name: 'Node.js', color: 'bg-green-100', textColor: 'text-green-700' },
         {
-          name: 'Stripe',
-          color: 'bg-yellow-100',
-          textColor: 'text-yellow-700',
+          name: 'Tensorflow.js',
+          color: 'bg-pink-100',
+          textColor: 'text-pink-700',
         },
+        { name: 'MobileNet', color: 'bg-gray-100', textColor: 'text-gray-700' },
       ],
-      image: SpeedBallImg,
-      liveUrl: 'https://speedball.example.com',
-      caseStudyUrl: '/projects/speedball',
+      image: CImageAIImg,
+      statusText: 'On GitHub only',
     },
   ],
   viewAllButton: {
@@ -85,6 +95,7 @@ const ProjectCard = ({
     liveUrl,
     caseStudyUrl,
     storeUrl,
+    statusText,
   } = project;
 
   const displayTags = tagLimit ? tags.slice(0, tagLimit) : tags;
@@ -106,7 +117,9 @@ const ProjectCard = ({
       {/* Content */}
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">{description}</p>
+        <p className="text-gray-600 mb-4 line-clamp-5 text-left">
+          {description}
+        </p>
 
         {/* Tags */}
         {showTags && tags.length > 0 && (
@@ -130,36 +143,34 @@ const ProjectCard = ({
         {/* Action Buttons */}
         {showActions && (
           <div className="flex gap-3">
-            {liveUrl && (
-              <a
-                href={liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600 transition-colors duration-300"
-              >
-                Live Demo
-              </a>
+            {statusText ? (
+              <div className="flex-1 py-2 px-4 rounded-lg text-center bg-gray-100 text-gray-500 font-medium cursor-not-allowed">
+                {statusText}
+              </div>
+            ) : (
+              <>
+                {liveUrl && (
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-[#3b82f6] text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600 transition-colors duration-300"
+                  >
+                    Live Demo
+                  </a>
+                )}
+                {storeUrl && (
+                  <a
+                    href={storeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg text-center hover:bg-green-600 transition-colors duration-300"
+                  >
+                    App Store
+                  </a>
+                )}
+              </>
             )}
-            {storeUrl && (
-              <a
-                href={storeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg text-center hover:bg-green-600 transition-colors duration-300"
-              >
-                App Store
-              </a>
-            )}
-            {/* {caseStudyUrl && (
-              <a
-                href={caseStudyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg text-center hover:bg-gray-50 transition-colors duration-300"
-              >
-                Case Study
-              </a>
-            )} */}
           </div>
         )}
       </div>
@@ -192,7 +203,7 @@ export default function ProjectsSection({
       className={`py-16 bg-gray-50 ${containerClassName}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-4">{config.title}</h2>
           {config.subtitle && (
             <p className="text-gray-600 mb-4">{config.subtitle}</p>

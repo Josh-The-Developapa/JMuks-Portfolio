@@ -34,34 +34,6 @@ const skillsConfig = {
       iconColor: 'text-green-700',
     },
     {
-      name: 'PyTorch',
-      level: 'Intermediate',
-      icon: 'fas fa-fire',
-      iconBg: 'bg-red-50',
-      iconColor: 'text-red-500',
-    },
-    {
-      name: 'NumPy',
-      level: 'Intermediate',
-      icon: 'fas fa-superscript',
-      iconBg: 'bg-yellow-50',
-      iconColor: 'text-yellow-600',
-    },
-    {
-      name: 'Pandas',
-      level: 'Intermediate',
-      icon: 'fas fa-table',
-      iconBg: 'bg-indigo-50',
-      iconColor: 'text-indigo-600',
-    },
-    {
-      name: 'Matplotlib',
-      level: 'Intermediate',
-      icon: 'fas fa-chart-line',
-      iconBg: 'bg-blue-100',
-      iconColor: 'text-blue-600',
-    },
-    {
       name: 'JavaScript',
       level: 'Advanced',
       icon: 'fab fa-js',
@@ -76,15 +48,22 @@ const skillsConfig = {
       iconColor: 'text-orange-500',
     },
     {
+      name: 'PyTorch',
+      level: 'Basic',
+      icon: 'fas fa-fire',
+      iconBg: 'bg-red-50',
+      iconColor: 'text-red-500',
+    },
+    {
       name: 'C++',
-      level: 'Intermediate',
+      level: 'Basic',
       icon: 'fas fa-code',
       iconBg: 'bg-gray-100',
       iconColor: 'text-gray-700',
     },
     {
       name: 'Arduino',
-      level: 'Intermediate',
+      level: 'Basic',
       icon: 'fas fa-microchip',
       iconBg: 'bg-green-100',
       iconColor: 'text-green-700',
@@ -101,6 +80,9 @@ const skillsConfig = {
     'Git',
     'GitHub',
     'VS Code',
+    'NumPy',
+    'Pandas',
+    'Matplotlib',
     'REST APIs',
     'Postman',
   ],
@@ -186,7 +168,7 @@ const SkillsSection = ({
     <section
       id={sectionId}
       ref={sectionRef}
-      className={`py-8 sm:py-12 lg:py-16 xl:py-8 bg-gray-50 ${containerClassName}`}
+      className={`py-15 bg-gray-50 ${containerClassName}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader title={config.title} subtitle={config.subtitle} />

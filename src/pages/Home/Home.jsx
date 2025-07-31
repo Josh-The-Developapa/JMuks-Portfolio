@@ -8,7 +8,7 @@ import SkillsSection from '../../components/Skills/Skills';
 import AboutSection from '../../components/About/About';
 import ExperienceSection from '../../components/Experience/Experience';
 import ProjectsSection from '../../components/Projects/Projects';
-import HeroImageMasonry from '../../components/HeroImageOrb/HeroImageOrb.jsx';
+import HeroImageMasonry from '../../components/HeroImageMasonry/HeroImageMasonry.jsx';
 
 const Home = () => {
   // State for active navigation link
@@ -79,17 +79,21 @@ const Home = () => {
 
       <main>
         {/* --- Hero Section --- */}
-        <section id="home" ref={sectionRefs.home} className="h-screen flex">
+        <section
+          id="home"
+          ref={sectionRefs.home}
+          className="min-h-screen flex flex-col lg:flex-row"
+        >
           {/* Left Panel - Text Content */}
-          <div className="w-1/2 flex justify-center items-center px-8 lg:px-16 pb-[100px]">
-            <div className="max-w-lg">
-              <h1 className="text-4xl md:text-5xl lg:text-[40px] font-bold leading-tight mb-4">
+          <div className="w-full lg:w-1/2 flex justify-center items-center px-6 sm:px-8 lg:px-16 py-5 lg:py-12 order-2 lg:order-1 relative z-20">
+            <div className="max-w-lg w-full">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[40px] font-bold leading-tight mb-4">
                 Hi, I'm <span className="gradient-text">Joshua Mukisa</span>
               </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-[30px] font-semibold text-gray-600 mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[30px] font-semibold text-gray-600 mb-6">
                 Software Developer
               </h2>
-              <p className="text-lg md:text-[18px] text-gray-500 mb-8 font-[400]">
+              <p className="text-base sm:text-lg md:text-[18px] text-gray-500 mb-8 font-[400] leading-relaxed">
                 I'm a software developer with 5+ years of experience building
                 full-stack apps, AI/ML systems, and real-world IoT solutions.
                 I'm driven by the goal to see Wakanda become a reality and the
@@ -97,26 +101,26 @@ const Home = () => {
                 redefine the global tech space.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="#contact"
+                <a
+                  href="#contact"
                   onClick={(e) => handleNavLinkClick(e, 'contact')}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300 text-center text-[16px]"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-center text-[16px]"
                 >
                   Get In Touch
-                </Link>
-                <Link
-                  to="#projects"
+                </a>
+                <a
+                  href="#projects"
                   onClick={(e) => handleNavLinkClick(e, 'projects')}
-                  className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-300 text-center text-[16px]"
+                  className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 text-center text-[16px]"
                 >
                   View Work
-                </Link>
+                </a>
               </div>
             </div>
           </div>
 
           {/* Right Panel - Masonry Layout */}
-          <div className="w-1/2 h-[100%]">
+          <div className="w-full lg:w-1/2 h-80 sm:h-96 lg:h-screen order-1 lg:order-2 relative">
             <HeroImageMasonry />
           </div>
         </section>

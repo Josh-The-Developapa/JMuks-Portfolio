@@ -115,8 +115,6 @@ const HeroImageMasonry = () => {
       <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none z-10"></div>
 
       {/* Side gradients for mobile horizontal scroll */}
-      <div className="md:hidden absolute top-0 left-0 bottom-0 w-8 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none z-10"></div>
-      <div className="md:hidden absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none z-10"></div>
 
       {/* Animation Styles */}
       <style jsx>{`

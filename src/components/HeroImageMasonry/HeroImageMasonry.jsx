@@ -90,14 +90,14 @@ const HeroImageMasonry = () => {
       </div>
 
       {/* Mobile Layout - Horizontal Scroll */}
-      <div className="md:hidden absolute inset-0">
-        <div className="flex gap-4 animate-mobile-scroll h-full items-center px-4 pt-[100px]">
-          {/* Triple the content for seamless looping */}
-          {[...mobileImages, ...mobileImages, ...mobileImages].map(
-            (item, idx) => (
+      {/* Mobile Layout - Horizontal Scroll */}
+      <div className="md:hidden absolute inset-0 overflow-hidden">
+        <div className="w-max h-full flex items-center px-4 pt-[100px] animate-mobile-scroll">
+          {[...Array(3)].flatMap(() =>
+            mobileImages.map((item, idx) => (
               <div
-                key={`mobile-${idx}`}
-                className="flex-shrink-0 w-56 h-80 overflow-hidden rounded-lg shadow-lg"
+                key={`mobile-${idx}-${Math.random()}`}
+                className="flex-shrink-0 w-56 h-80 overflow-hidden rounded-lg shadow-lg mx-2"
               >
                 <img
                   src={item.image}
@@ -105,7 +105,7 @@ const HeroImageMasonry = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-            )
+            ))
           )}
         </div>
       </div>
@@ -143,7 +143,7 @@ const HeroImageMasonry = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-33.33%);
+            transform: translateX(-66.66%);
           }
         }
 
@@ -156,7 +156,7 @@ const HeroImageMasonry = () => {
         }
 
         .animate-mobile-scroll {
-          animation: mobile-scroll 25s linear infinite;
+          animation: mobile-scroll 50s linear infinite;
         }
       `}</style>
     </div>

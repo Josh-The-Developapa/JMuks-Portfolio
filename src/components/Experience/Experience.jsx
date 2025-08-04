@@ -54,10 +54,9 @@ const experienceConfig = {
       website: 'https://greatlakessafaris.com',
       logoAlt: 'Great Lake Safaris Logo',
       achievements: [
-        'Maintained close contact with CEO, Mr. Amos Wekesa, gaining insight into business strategy and tech in tourism',
-        'Assisted with website updates and digital content management',
-        'Helped organize booking data and client information systems',
-        'Observed tour logistics and backend operations',
+        'Collaborated directly with CEO Amos Wekesa, gaining firsthand exposure to East African tourism strategy and real-time decision-making',
+        'Assisted in website content management and proposed automation workflows to enhance booking efficiency and user experience',
+        'Researched and summarized emerging tech trends (e.g. mobile booking, digital marketing tools), recommending tools to boost operational efficiency and online presence',
       ],
     },
     // {

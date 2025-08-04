@@ -1,7 +1,7 @@
 import React from 'react';
 import VoteAbleImg from '../../assets/VoteAble.png';
 import CaderaImg from '../../assets/Cadera.png';
-import CImageAIImg from '../../assets/CImage-AI.png'; // <-- updated import
+import CImageAIImg from '../../assets/CImage-AI.png';
 import { Link } from 'react-router';
 
 const projectsConfig = {
@@ -51,7 +51,6 @@ const projectsConfig = {
       ],
       image: CaderaImg,
       statusText: 'In Progress',
-      // liveUrl: 'https://cadera-frontend.onrender.com',
     },
     {
       title: 'CImage AI',
@@ -78,7 +77,7 @@ const projectsConfig = {
   },
 };
 
-// Project Card now shows image on top instead of icon
+// Enhanced Project Card with optimal 320px width
 const ProjectCard = ({
   project,
   className = '',
@@ -102,38 +101,53 @@ const ProjectCard = ({
 
   return (
     <div
-      className={`bg-white rounded-xl shadow-md transition-all duration-300 overflow-hidden ${cardHoverEffect} ${className}`}
+      className={`
+        bg-white rounded-xl shadow-md transition-all duration-300 overflow-hidden 
+        ${cardHoverEffect} ${className}
+        w-full max-w-[320px] mx-auto
+        sm:w-[320px] sm:max-w-none
+      `}
     >
       {/* Project Snapshot Image */}
       {image && (
-        <img
-          src={image}
-          alt={`${title} snapshot`}
-          className="w-full h-48 object-cover"
-          loading="lazy"
-        />
+        <div className="relative overflow-hidden">
+          <img
+            src={image}
+            alt={`${title} snapshot`}
+            className="w-full h-48 sm:h-52 md:h-48 lg:h-52 xl:h-56 object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
       )}
 
       {/* Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-5 text-left">
+      <div className="p-4 sm:p-5 md:p-6">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-900 line-clamp-2">
+          {title}
+        </h3>
+
+        <p className="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3 sm:line-clamp-4 leading-relaxed">
           {description}
         </p>
 
         {/* Tags */}
         {showTags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
             {displayTags.map((tag, i) => (
               <span
                 key={`tag-${i}`}
-                className={`px-3 py-1 rounded-full text-sm font-medium ${tag.color} ${tag.textColor}`}
+                className={`
+                  px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium
+                  ${tag.color} ${tag.textColor}
+                  transition-all duration-200 hover:scale-105
+                `}
               >
                 {tag.name}
               </span>
             ))}
             {tagLimit && tags.length > tagLimit && (
-              <span className="px-3 py-1 text-sm text-gray-500">
+              <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm text-gray-500 bg-gray-50 rounded-full">
                 +{tags.length - tagLimit} more
               </span>
             )}
@@ -142,9 +156,9 @@ const ProjectCard = ({
 
         {/* Action Buttons */}
         {showActions && (
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             {statusText ? (
-              <div className="flex-1 py-2 px-4 rounded-lg text-center bg-gray-100 text-gray-500 font-medium cursor-not-allowed">
+              <div className="flex-1 py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg text-center bg-gray-100 text-gray-500 font-medium cursor-not-allowed text-sm sm:text-base">
                 {statusText}
               </div>
             ) : (
@@ -154,7 +168,7 @@ const ProjectCard = ({
                     href={liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-[#3b82f6] text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600 transition-colors duration-300"
+                    className="flex-1 bg-blue-500 text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg text-center hover:bg-blue-600 transition-all duration-300 font-medium text-sm sm:text-base hover:shadow-md"
                   >
                     Live Demo
                   </a>
@@ -164,7 +178,7 @@ const ProjectCard = ({
                     href={storeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg text-center hover:bg-green-600 transition-colors duration-300"
+                    className="flex-1 bg-green-500 text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg text-center hover:bg-green-600 transition-all duration-300 font-medium text-sm sm:text-base hover:shadow-md"
                   >
                     App Store
                   </a>
@@ -183,7 +197,7 @@ export default function ProjectsSection({
   sectionId = 'projects',
   sectionRef,
   containerClassName = '',
-  gridClassName = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+  gridClassName = '', // This will be overridden by our responsive grid
   showViewAllButton = true,
   viewAllButtonVariant = 'outline',
   cardHoverEffect = 'hover:shadow-lg hover:-translate-y-2',
@@ -200,20 +214,37 @@ export default function ProjectsSection({
     <section
       id={sectionId}
       ref={sectionRef}
-      className={`py-16 bg-gray-50 ${containerClassName}`}
+      className={`py-12 sm:py-16 lg:py-20 bg-gray-50 ${containerClassName}`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-4">{config.title}</h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-gray-900">
+            {config.title}
+          </h2>
           {config.subtitle && (
-            <p className="text-gray-600 mb-4">{config.subtitle}</p>
+            <p className="text-gray-600 mb-4 sm:mb-6 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              {config.subtitle}
+            </p>
           )}
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
+          <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
         </div>
 
-        {/* Projects Grid */}
-        <div className={`grid ${gridClassName} gap-8`}>
-          {displayProjects.map((project) => (
+        {/* Enhanced Responsive Projects Grid - Optimized for 320px cards */}
+        <div
+          className={`
+          grid gap-6 sm:gap-8 lg:gap-10
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          xl:grid-cols-3
+          2xl:grid-cols-4
+          justify-items-center
+          place-items-center
+          ${gridClassName}
+        `}
+        >
+          {displayProjects.map((project, index) => (
             <ProjectCard
               key={project.title}
               project={project}
@@ -227,21 +258,28 @@ export default function ProjectsSection({
 
         {/* View All Button */}
         {showViewAllButton && config.viewAllButton && (
-          <div className="text-center mt-12">
+          <div className="text-center mt-10 sm:mt-12 lg:mt-16">
             <Link
               to={config.viewAllButton.url}
               target="_blank"
-              className={`inline-flex items-center px-6 py-3 font-medium rounded-lg transition-all duration-300 ${
-                viewAllButtonVariant === 'solid'
-                  ? 'bg-blue-500 text-white hover:bg-blue-600'
-                  : viewAllButtonVariant === 'ghost'
-                  ? 'text-blue-500 hover:text-blue-700 hover:bg-blue-50'
-                  : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
-              }`}
+              className={`
+                inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 
+                font-medium rounded-lg transition-all duration-300
+                text-sm sm:text-base
+                ${
+                  viewAllButtonVariant === 'solid'
+                    ? 'bg-blue-500 text-white hover:bg-blue-600 hover:shadow-lg transform hover:-translate-y-0.5'
+                    : viewAllButtonVariant === 'ghost'
+                    ? 'text-blue-500 hover:text-blue-700 hover:bg-blue-50 border border-transparent hover:border-blue-200'
+                    : 'border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 hover:shadow-md'
+                }
+              `}
             >
               {config.viewAllButton.text}
               {config.viewAllButton.icon && (
-                <i className={`${config.viewAllButton.icon} ml-2`}></i>
+                <i
+                  className={`${config.viewAllButton.icon} ml-2 transition-transform duration-300 group-hover:translate-x-1`}
+                ></i>
               )}
             </Link>
           </div>

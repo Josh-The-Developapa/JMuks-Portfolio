@@ -6,7 +6,7 @@ const aboutConfig = {
   whoAmI: {
     heading: 'Who I Am',
     description:
-      "I'm a passionate software developer with 5+ years of experience building full-stack web apps. I also work on AI/ML projects—both training models from scratch and using pre-trained ones—and have hands-on experience with IoT, including Arduino-based real-world builds.",
+      "I got into tech back in March 2020, during Uganda's first COVID lockdown. I was thirteen, bored out of my mind, dreaming big like the Zuckerbergs and Gates of the world, but knowing absolutely nothing. So I taught myself using YouTube tutorials, janky coding apps, and online courses. I just kept building. One of those projects became my first real venture: a successful e-voting platform that showed me I was capable of a lot more. For the first time, I could call myself a CEO. Since then, I've just kept learning, building, and leveling up. My goal is to see more Africans in the global tech conversation, not just as users, but as leaders and pioneers.",
     image: {
       src: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
       alt: 'Alex working',
@@ -126,21 +126,16 @@ const AboutSection = ({
   sectionRef,
 }) => {
   return (
-    <section
-      className="w-full min-h-screen bg-gray-50"
-      ref={sectionRef}
-      id={sectionId}
-    >
-      {/* Mobile-first approach */}
-      <div className="flex flex-col lg:flex-row w-full min-h-screen">
-        {/* Image Section */}
-        <div className="w-full lg:w-1/2 h-64 sm:h-80 md:h-96 lg:h-screen relative">
+    <section className="w-full bg-gray-50" ref={sectionRef} id={sectionId}>
+      {/* Mobile-first approach with flex container */}
+      <div className="flex flex-col lg:flex-row w-full">
+        {/* Image Section - will match content height on desktop */}
+        <div className="w-full lg:w-1/2 h-64 sm:h-80 md:h-96 lg:h-[950px]">
           <ProfileImage image={config.whoAmI.image} />
-          {/* Overlay for better text readability on mobile if needed */}
         </div>
 
-        {/* Content Section */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+        {/* Content Section - this determines the height */}
+        <div className="w-full lg:w-1/2 flex items-start justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
           <div className="w-full max-w-lg xl:max-w-xl">
             <SectionHeader title={config.title} subtitle={config.subtitle} />
 
@@ -148,7 +143,7 @@ const AboutSection = ({
               {config.whoAmI.heading}
             </h3>
 
-            <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
+            <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed text-justify">
               {config.whoAmI.description}
             </p>
 

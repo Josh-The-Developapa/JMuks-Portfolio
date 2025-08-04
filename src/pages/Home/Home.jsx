@@ -87,13 +87,13 @@ const Home = () => {
           {/* Left Panel - Text Content */}
           <div className="w-full lg:w-1/2 flex justify-center items-center px-6 sm:px-8 lg:px-16 py-5 lg:py-12 order-2 lg:order-1 relative z-20">
             <div className="max-w-lg w-full">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[40px] font-bold leading-tight mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-[40px] lg:text-[40px] font-bold leading-tight mb-4">
                 Hi, I'm <span className="gradient-text">Joshua Mukisa</span>
               </h1>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[30px] font-semibold text-gray-600 mb-6">
                 Software Developer
               </h2>
-              <p className="text-base sm:text-lg md:text-[18px] text-gray-500 mb-8 font-[400] leading-relaxed">
+              <p className="text-base sm:text-lg md:text-[18px] text-gray-500 mb-8 font-[400] leading-relaxed text-justify">
                 I'm a software developer with 5+ years of experience building
                 full-stack apps, AI/ML systems, and real-world IoT solutions.
                 I'm driven by the goal to see Wakanda become a reality and the
@@ -101,20 +101,20 @@ const Home = () => {
                 redefine the global tech space.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#contact"
+                <Link
+                  to="#contact"
                   onClick={(e) => handleNavLinkClick(e, 'contact')}
                   className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 text-center text-[16px]"
                 >
                   Get In Touch
-                </a>
-                <a
-                  href="#projects"
+                </Link>
+                <Link
+                  to="#projects"
                   onClick={(e) => handleNavLinkClick(e, 'projects')}
                   className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 text-center text-[16px]"
                 >
                   View Work
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -164,12 +164,12 @@ const Home = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Email</h4>
-                      <a
-                        href="mailto:kiryowajoshua22@gmail.com"
+                      <Link
+                        to="mailto:kiryowajoshua22@gmail.com"
                         className="text-blue-500 hover:text-blue-700"
                       >
                         kiryowajoshua22@gmail.com
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -178,15 +178,15 @@ const Home = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">Phone</h4>
-                      <a
-                        href="tel:+256755779927"
+                      <Link
+                        to="tel:+256755779927"
                         className="text-gray-600 hover:text-gray-900"
                       >
                         +256 755 779 927
-                      </a>
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex items-start">
+                  {/* <div className="flex items-start">
                     <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center mr-4">
                       <i className="fas fa-map-marker-alt text-green-500"></i>
                     </div>
@@ -194,37 +194,37 @@ const Home = () => {
                       <h4 className="font-medium text-gray-900">Location</h4>
                       <p className="text-gray-600">Naalya Estate, Uganda</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="mt-8">
                   <h4 className="font-medium text-gray-900 mb-4">
                     Connect with me
                   </h4>
                   <div className="flex space-x-4">
-                    <a
-                      href="https://linkedin.com"
+                    <Link
+                      to="https://www.linkedin.com/in/joshua-mukisa-kiryowa/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-blue-100 hover:text-blue-500"
                     >
                       <i className="fab fa-linkedin-in"></i>
-                    </a>
-                    <a
-                      href="https://github.com/Josh-The-Developapa"
+                    </Link>
+                    <Link
+                      to="https://github.com/Josh-The-Developapa"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-800 hover:text-white"
                     >
                       <i className="fab fa-github"></i>
-                    </a>
-                    <a
-                      href="https://twitter.com"
+                    </Link>
+                    <Link
+                      to="https://www.instagram.com/jmuks_k/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-blue-400 hover:text-white"
+                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-pink-600 hover:text-white"
                     >
                       <i className="fab fa-instagram"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

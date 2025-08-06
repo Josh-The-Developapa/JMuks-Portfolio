@@ -107,7 +107,7 @@ const Header = ({ activeLink, onNavLinkClick }) => {
             {/* Resume Button - Desktop */}
             <button
               onClick={handleResumeClick}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center space-x-2"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center space-x-2 cursor-pointer"
             >
               <svg
                 className="w-4 h-4"

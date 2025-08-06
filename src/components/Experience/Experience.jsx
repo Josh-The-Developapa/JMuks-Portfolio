@@ -2,9 +2,11 @@ import React from 'react';
 import DEI from '../../assets/DEI BioPharm Ltd.png';
 import UpLift from '../../assets/UpLift.jpg';
 import ElectoralComission from '../../assets/Electoral Comission.png';
-import GreatLakeSafaris from '../../assets/Great-Lakes-Safaris.png';
+// import GreatLakeSafaris from '../../assets/Great-Lakes-Safaris.png';
 import VoteAbleLogo from '../../assets/VoteAble-Logo.jpg';
 import VideraLogo from '../../assets/Videra-Logo.jpg';
+import MakariosLogo from '../../assets/makarios.png';
+import AgaKhanLogo from '../../assets/Aga-Khan.png';
 import { Link } from 'react-router';
 
 // Configuration object with company logos
@@ -45,20 +47,20 @@ const experienceConfig = {
         'Managed client relations, project timelines, and collaborated closely with a growing team',
       ],
     },
-    {
-      title: 'Digital Operations & IT Assistant',
-      company: 'Great Lake Safaris Ltd',
-      period: 'June 2024 - Aug 2024, June 2025 - July 2025',
-      location: 'Mutungo Hill, Biina Road - Kampala, Uganda',
-      logo: GreatLakeSafaris,
-      website: 'https://greatlakessafaris.com',
-      logoAlt: 'Great Lake Safaris Logo',
-      achievements: [
-        'Collaborated directly with CEO Amos Wekesa, gaining firsthand exposure to East African tourism strategy and real-time decision-making',
-        'Assisted in website content management and proposed automation workflows to enhance booking efficiency and user experience',
-        'Researched and summarized emerging tech trends (e.g. mobile booking, digital marketing tools), recommending tools to boost operational efficiency and online presence',
-      ],
-    },
+    // {
+    //   title: 'Digital Operations & IT Assistant',
+    //   company: 'Great Lake Safaris Ltd',
+    //   period: 'June 2024 - Aug 2024',
+    //   location: 'Mutungo Hill, Biina Road - Kampala, Uganda',
+    //   logo: GreatLakeSafaris,
+    //   website: 'https://greatlakessafaris.com',
+    //   logoAlt: 'Great Lake Safaris Logo',
+    //   achievements: [
+    //     'Collaborated directly with CEO Amos Wekesa, gaining firsthand exposure to East African tourism strategy and real-time decision-making',
+    //     'Assisted in website content management and proposed automation workflows to enhance booking efficiency and user experience',
+    //     'Researched and summarized emerging tech trends (e.g. mobile booking, digital marketing tools), recommending tools to boost operational efficiency and online presence',
+    //   ],
+    // },
     // {
     //   title: 'IT & Operations Intern',
     //   company: 'DEI BioPharma Ltd',
@@ -106,6 +108,18 @@ const experienceConfig = {
         'Strengthened web development skills and teamwork through project collaboration',
         'Gained exposure to cutting-edge web technologies and tools',
       ],
+    },
+  ],
+  additionalClients: [
+    {
+      name: 'Makarios Junior School',
+      logo: MakariosLogo,
+      logoAlt: 'Makarios-Logo',
+    },
+    {
+      name: 'Aga Khan High School',
+      logo: AgaKhanLogo,
+      logoAlt: 'Aga-Khan-Logo',
     },
   ],
 };
@@ -292,30 +306,35 @@ const TimelineContainer = ({
   </div>
 );
 
-// Flowing Company Showcase Component
+// Modified CompanyShowcase Component with additional clients/partners support
 const CompanyShowcase = ({
   experiences,
+  additionalClients = [], // New prop for additional clients/partners
   className = '',
   logoWidth = 'w-32',
   logoHeight = 'h-24',
   animationSpeed = '60s',
+  showcaseTitle = 'Proud to have worked with', // Customizable title
 }) => {
   const companiesWithLogos = experiences.filter((exp) => exp.logo);
 
-  if (companiesWithLogos.length === 0) return null;
+  // Combine experience companies with additional clients
+  const allCompanies = [...companiesWithLogos, ...additionalClients];
+
+  if (allCompanies.length === 0) return null;
 
   // Duplicate the logos to create seamless loop
   const duplicatedCompanies = [
-    ...companiesWithLogos,
-    ...companiesWithLogos,
-    ...companiesWithLogos,
+    ...allCompanies,
+    ...allCompanies,
+    ...allCompanies,
   ];
 
   return (
     <div className={`mt-12 sm:mt-16 ${className}`}>
       <div className="text-center mb-8 sm:mb-12">
         <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-4">
-          Proud to have worked with
+          {showcaseTitle}
         </h3>
         <div className="w-16 sm:w-20 h-0.5 bg-gray-300 mx-auto"></div>
       </div>
@@ -329,16 +348,28 @@ const CompanyShowcase = ({
             width: 'max-content',
           }}
         >
-          {duplicatedCompanies.map((experience, index) => (
+          {duplicatedCompanies.map((company, index) => (
             <FlowingCompanyLogo
               key={`flowing-company-${index}`}
-              logo={experience.logo}
-              logoAlt={experience.logoAlt}
-              company={experience.company}
+              logo={company.logo}
+              logoAlt={
+                company.logoAlt || `${company.company || company.name} logo`
+              }
+              company={company.company || company.name}
               width={logoWidth}
               height={logoHeight}
             />
           ))}
+
+          {/* Keep the Makarios logo as it was hardcoded before */}
+          <FlowingCompanyLogo
+            key={`flowing-company-makarios`}
+            logo={MakariosLogo}
+            logoAlt="Makarios-Logo"
+            company="Makarios Junior School"
+            width={logoWidth}
+            height={logoHeight}
+          />
         </div>
 
         {/* Gradient Overlays for smooth edges */}
@@ -368,7 +399,7 @@ const CompanyShowcase = ({
   );
 };
 
-// Main Experience Section Component
+// Updated ExperienceSection to pass additional clients
 const ExperienceSection = ({
   config = experienceConfig,
   sectionId = 'experience',
@@ -380,10 +411,13 @@ const ExperienceSection = ({
   timelineLineColor = 'border-gray-200',
   dotColor = 'bg-blue-500',
   cardLayout = 'default',
-  // New props for company showcase customization
+  // Company showcase props
   showcaseLogoWidth = 'w-40',
   showcaseLogoHeight = 'h-30',
   showcaseAnimationSpeed = '40s',
+  showcaseTitle = 'Proud to have worked with',
+  // New prop for additional clients/partners
+  additionalClients = experienceConfig.additionalClients,
 }) => {
   const renderExperiences = () => {
     const experienceElements = config.experiences.map((experience, index) => (
@@ -433,9 +467,11 @@ const ExperienceSection = ({
         {showCompanyShowcase && (
           <CompanyShowcase
             experiences={config.experiences}
+            additionalClients={additionalClients}
             logoWidth={showcaseLogoWidth}
             logoHeight={showcaseLogoHeight}
             animationSpeed={showcaseAnimationSpeed}
+            showcaseTitle={showcaseTitle}
           />
         )}
       </div>

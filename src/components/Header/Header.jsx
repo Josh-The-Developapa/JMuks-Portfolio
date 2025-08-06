@@ -27,6 +27,11 @@ const Header = ({ activeLink, onNavLinkClick }) => {
     setMobileMenuOpen(false); // Close mobile menu on link click
   };
 
+  const handleResumeClick = () => {
+    window.open('/joshua-mukisa-resume.pdf', '_blank');
+    setMobileMenuOpen(false); // Close mobile menu on resume click
+  };
+
   // Logo Component for reusability with gradient
   const JMLogo = ({ size = 40, className = '' }) => (
     <div
@@ -98,6 +103,27 @@ const Header = ({ activeLink, onNavLinkClick }) => {
                 )}
               </a>
             ))}
+
+            {/* Resume Button - Desktop */}
+            <button
+              onClick={handleResumeClick}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center space-x-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Resume</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -142,9 +168,7 @@ const Header = ({ activeLink, onNavLinkClick }) => {
           isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden bg-white/95 backdrop-blur-sm border-t border-gray-100`}
       >
-        <div className="px-4 pt-2 pb-4 space-y-1">
-          {/* Mobile Brand Info */}
-
+        <div className="px-4 pt-2 pb-4">
           {/* Mobile Nav Links */}
           {navLinks.map((link) => (
             <a
@@ -160,6 +184,27 @@ const Header = ({ activeLink, onNavLinkClick }) => {
               {link.text}
             </a>
           ))}
+
+          {/* Resume Button - Mobile */}
+          <button
+            onClick={handleResumeClick}
+            className="w-full mt-4 cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg flex items-center justify-center space-x-2"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <span>View Resume</span>
+          </button>
         </div>
       </div>
     </nav>

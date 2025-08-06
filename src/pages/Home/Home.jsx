@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // Correct import from 'react-router-dom' for modern React Router
 import { Link } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -10,9 +11,126 @@ import ExperienceSection from '../../components/Experience/Experience';
 import ProjectsSection from '../../components/Projects/Projects';
 import HeroImageMasonry from '../../components/HeroImageMasonry/HeroImageMasonry.jsx';
 
+// Success Toast Component
+const SuccessToast = ({ isVisible, onClose }) => {
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, onClose]);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed top-20 right-4 z-50 animate-slide-in">
+      <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3 max-w-sm">
+        <div className="flex-shrink-0">
+          <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center animate-bounce">
+            <svg
+              className="w-5 h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div className="flex-1">
+          <p className="font-medium">Message Sent!</p>
+          <p className="text-sm text-green-100">
+            Thanks for reaching out. I'll get back to you soon!
+          </p>
+        </div>
+        <button
+          onClick={onClose}
+          className="text-white hover:text-green-200 transition-colors"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Confetti Animation Component
+const ConfettiParticle = ({ delay, color, left, animationDuration }) => (
+  <div
+    className="absolute w-3 h-3 opacity-80"
+    style={{
+      left: `${left}%`,
+      backgroundColor: color,
+      animationDelay: `${delay}s`,
+      animationDuration: `${animationDuration}s`,
+      animation: `confetti-fall ${animationDuration}s linear forwards`,
+    }}
+  />
+);
+
+const ConfettiAnimation = ({ isActive }) => {
+  const confettiColors = [
+    '#3B82F6',
+    '#8B5CF6',
+    '#10B981',
+    '#F59E0B',
+    '#EF4444',
+    '#EC4899',
+  ];
+  const particles = [];
+
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      id: i,
+      color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+      left: Math.random() * 100,
+      delay: Math.random() * 2,
+      animationDuration: 2 + Math.random() * 2,
+    });
+  }
+
+  if (!isActive) return null;
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
+      {particles.map((particle) => (
+        <ConfettiParticle
+          key={particle.id}
+          delay={particle.delay}
+          color={particle.color}
+          left={particle.left}
+          animationDuration={particle.animationDuration}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Home = () => {
   // State for active navigation link
   const [activeLink, setActiveLink] = useState('home');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   // Refs for each section for scroll-spy functionality
   const sectionRefs = {
@@ -26,6 +144,7 @@ const Home = () => {
 
   // Effect for updating active nav link on scroll
   useEffect(() => {
+    emailjs.init(import.meta.env.VITE_PUBLIC_KEY);
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       let currentSection = 'home';
@@ -50,6 +169,56 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sectionRefs]);
 
+  // Add custom CSS for animations
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slide-in {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes pulse-success {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      
+      .animate-slide-in {
+        animation: slide-in 0.5s ease-out;
+      }
+      
+      .animate-pulse-success {
+        animation: pulse-success 0.6s ease-in-out;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   // Handler for smooth scrolling to sections
   const handleNavLinkClick = (e, targetId) => {
     e.preventDefault();
@@ -63,11 +232,34 @@ const Home = () => {
     }
   };
 
-  // Form submission handler
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    e.target.reset();
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        e.target,
+        import.meta.env.VITE_PUBLIC_KEY
+      );
+
+      // Success animation sequence
+      setShowConfetti(true);
+      setShowSuccessToast(true);
+      e.target.reset();
+
+      // Hide confetti after 3 seconds
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      // You could add an error toast here too
+      alert('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,6 +268,15 @@ const Home = () => {
         activeLink={activeLink}
         onNavLinkClick={(e, id) => handleNavLinkClick(e, id)}
       />
+
+      {/* Success Toast */}
+      <SuccessToast
+        isVisible={showSuccessToast}
+        onClose={() => setShowSuccessToast(false)}
+      />
+
+      {/* Confetti Animation */}
+      <ConfettiAnimation isActive={showConfetti} />
 
       <main>
         {/* --- Hero Section --- */}
@@ -186,15 +387,6 @@ const Home = () => {
                       </Link>
                     </div>
                   </div>
-                  {/* <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center mr-4">
-                      <i className="fas fa-map-marker-alt text-green-500"></i>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900">Location</h4>
-                      <p className="text-gray-600">Naalya Estate, Uganda</p>
-                    </div>
-                  </div> */}
                 </div>
                 <div className="mt-8">
                   <h4 className="font-medium text-gray-900 mb-4">
@@ -245,6 +437,7 @@ const Home = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
                       placeholder="Your name"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
@@ -261,6 +454,7 @@ const Home = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
                       placeholder="Your email"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
@@ -276,6 +470,7 @@ const Home = () => {
                       name="subject"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
                       placeholder="Subject"
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
@@ -292,13 +487,26 @@ const Home = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
                       placeholder="Your message"
                       required
+                      disabled={isSubmitting}
                     ></textarea>
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+                    disabled={isSubmitting}
+                    className={`w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300 ${
+                      isSubmitting
+                        ? 'opacity-70 cursor-not-allowed'
+                        : 'hover:scale-105'
+                    }`}
                   >
-                    Send Message
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center space-x-2">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Sending...</span>
+                      </div>
+                    ) : (
+                      'Send Message'
+                    )}
                   </button>
                 </form>
               </div>

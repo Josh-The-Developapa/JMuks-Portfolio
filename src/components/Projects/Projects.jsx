@@ -127,9 +127,8 @@ const ProjectCard = ({
           {title}
         </h3>
 
-        <p className="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3 sm:line-clamp-4 leading-relaxed">
-          {description}
-        </p>
+        {/* <p className="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3 sm:line-clamp-4 leading-relaxed"> */}
+        <p className="text-gray-600 mb-4 text-sm sm:text-base">{description}</p>
 
         {/* Tags */}
         {showTags && tags.length > 0 && (

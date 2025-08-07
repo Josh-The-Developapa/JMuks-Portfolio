@@ -97,12 +97,12 @@ const HeroImageMasonry = () => {
             mobileImages.map((item, idx) => (
               <div
                 key={`mobile-${idx}-${Math.random()}`}
-                className="flex-shrink-0 w-56 h-80 overflow-hidden rounded-lg shadow-lg mx-2"
+                className="flex-shrink-0 overflow-hidden rounded-lg shadow-lg mx-2"
               >
                 <img
                   src={item.image}
                   alt={item.alt}
-                  className="w-full h-full object-cover"
+                  className="w-[auto] h-80 object-cover"
                 />
               </div>
             ))
